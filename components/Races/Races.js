@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, ScrollView, StyleSheet, Platform, NativeModules } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Platform, NativeModules, Button } from 'react-native';
 import { Card } from 'react-native-paper';
 import RaceGuarded from './RaceGuarded';
 import Race from './Race';
@@ -138,6 +138,10 @@ export default class Races extends React.Component {
     );
   }
 }
+
+Races.navigationOptions = {
+  title: 'Races',
+};
 
 const { StatusBarManager } = NativeModules;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBarManager.HEIGHT;
