@@ -1,14 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Card, Button, Text } from 'react-native-paper';
-import styles from '../styles';
+import { Card, Button } from 'react-native-paper';
 
 export default function HomeScreen({ navigation }) {
-  const mode = 'outlined';
+  const mode = 'contained';
 
   return (
-    <View styles={styles.container}>
-      <Card>
+    <Card>
+      <Card.Content>
         <Button
           onPress={() => {navigation.navigate('Seeding')}}
           mode={mode} >
@@ -34,8 +32,8 @@ export default function HomeScreen({ navigation }) {
           mode={mode} >
           Knockouts
         </Button>
-      </Card>
-    </View>
+      </Card.Content>
+    </Card>
   )
 }
 

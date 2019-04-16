@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
+import { Card, Text } from 'react-native-paper';
 import RaceGuarded from './RaceGuarded';
 import Race from './Race';
 import styles from '../styles';
@@ -24,7 +25,7 @@ export default class Races extends React.Component {
   testInit() {
     let races = [];
 
-    for (let i = 1; i < 10; i++) {
+    for (let i = 1; i <= 20; i++) {
       races.push({
           team1: 'SKUM ' + i,
           team2: 'Leeds ' + i,
@@ -87,39 +88,41 @@ export default class Races extends React.Component {
     const { races } = this.state;
 
     return (
-      <View>
-        <ScrollView>
-          <Text style={styles.section}>
-            Finished Races
-          </Text>
-          {races.filter(race => race.winner)
-            .sort((a, b) => a.raceNo - b.raceNo)
-            .map(race => (
-              <RaceGuarded
-                key={race.raceNo}
-                race={race}
-                onSetWinner={this.handleWinner}
-                onDsqTeam={this.handleDsqTeam}
-              />
-            ))
-          }
-          <Text style={styles.section}>
-            Pending Races
-          </Text>
-          {races.filter(race => !race.winner)
-            .sort((a, b) => a.raceNo - b.raceNo)
-            .map(race => (
-              <Race
-                key={race.raceNo}
-                race={race}
-                onSetWinner={this.handleWinner}
-                onDsqTeam={this.handleDsqTeam}
-              />
-            ))
-          }
-          <Text>{this.state.message}</Text>
-        </ScrollView>
-      </View>
+      <ScrollView>
+        <Card>
+          <Card.Content>
+            <Text style={styles.section}>
+              Finished Races
+            </Text>
+            {races.filter(race => race.winner)
+              .sort((a, b) => a.raceNo - b.raceNo)
+              .map(race => (
+                <RaceGuarded
+                  key={race.raceNo}
+                  race={race}
+                  onSetWinner={this.handleWinner}
+                  onDsqTeam={this.handleDsqTeam}
+                />
+              ))
+            }
+            <Text style={styles.section}>
+              Pending Races
+            </Text>
+            {races.filter(race => !race.winner)
+              .sort((a, b) => a.raceNo - b.raceNo)
+              .map(race => (
+                <Race
+                  key={race.raceNo}
+                  race={race}
+                  onSetWinner={this.handleWinner}
+                  onDsqTeam={this.handleDsqTeam}
+                />
+              ))
+            }
+            <Text>{this.state.message}</Text>
+          </Card.Content>
+        </Card>
+      </ScrollView>
     );
   }
 }
