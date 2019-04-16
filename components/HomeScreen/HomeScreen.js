@@ -1,30 +1,39 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { Card, Button } from 'react-native-paper';
 
 export default function HomeScreen({ navigation }) {
+  const mode = 'contained';
+
   return (
-    <View>
-      <Button
-        title='Seeding'
-        onPress={() => {navigation.navigate('Seeding')}}
-      />
-      <Button
-        title='Management'
-        onPress={() => {navigation.navigate('Management')}}
-      />
-      <Button
-        title='Round 1'
-        onPress={() => {navigation.navigate('Round2')}}
-      />
-      <Button
-        title='Round 2'
-        onPress={() => {navigation.navigate('Round2')}}
-      />
-      <Button
-        title='Knockouts'
-        onPress={() => {navigation.navigate('Knockouts')}}
-      />
-    </View>
+    <Card>
+      <Card.Content>
+        <Button
+          onPress={() => {navigation.navigate('Seeding')}}
+          mode={mode} >
+          Seeding
+        </Button>
+        <Button
+          onPress={() => {navigation.navigate('Management')}}
+          mode={mode} >
+          Management
+        </Button>
+        <Button
+          onPress={() => {navigation.navigate('Round1', { title: 'Round 1' })}}
+          mode={mode} >
+          Round 1
+        </Button>
+        <Button
+          onPress={() => {navigation.navigate('Round2', { title: 'Round 2' })}}
+          mode={mode} >
+          Round 2
+        </Button>
+        <Button
+          onPress={() => {navigation.navigate('Knockouts', { title: 'Knockouts' })}}
+          mode={mode} >
+          Knockouts
+        </Button>
+      </Card.Content>
+    </Card>
   )
 }
 

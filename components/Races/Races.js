@@ -1,11 +1,12 @@
-import * as React from 'react';
-import { Text, View, ScrollView, StyleSheet, Platform, NativeModules, Button } from 'react-native';
-import { Card } from 'react-native-paper';
+import React from 'react';
+import { ScrollView } from 'react-native';
+import { Card, Text } from 'react-native-paper';
 import RaceGuarded from './RaceGuarded';
 import Race from './Race';
+import styles from '../styles';
 
 export default class Races extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
 
     this.state = {
@@ -24,8 +25,8 @@ export default class Races extends React.Component {
   testInit() {
     let races = [];
 
-    for (let i = 1; i < 5; i++) {
-      races = [...races, {
+    for (let i = 1; i <= 20; i++) {
+      races.push({
           team1: 'SKUM ' + i,
           team2: 'Leeds ' + i,
           division: 'M',
@@ -33,7 +34,7 @@ export default class Races extends React.Component {
           team1Dsq: false,
           team2Dsq: false,
           raceNo: i
-      }]
+      });
     }
 
     this.setState({
@@ -60,9 +61,7 @@ export default class Races extends React.Component {
 
     const race = races.find(r => r.raceNo === raceNo);
     let winner = race.winner
-    if (race.winner === teamNo) {
-      winner = teamNo === 1 ? 2 : 1
-    }
+    winner = teamNo === 1 ? 2 : 1
 
     const dsqKey = `team${teamNo}Dsq`
     const noDsqKey = `team${winner}Dsq`
@@ -89,85 +88,45 @@ export default class Races extends React.Component {
     const { races } = this.state;
 
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <Text style={styles.section}>
-            Finished Races (readonly)
-          </Text>
-          {races.filter(race => race.winner)
-            .sort((a, b) => a.raceNo - b.raceNo)
-            .map(race => (
-              <Race
-                key={race.raceNo}
-                race={race}
-                readonly
-              />
-            ))
-          }
-          <Text style={styles.section}>
-            Finished Races (guarded)
-          </Text>
-          {races.filter(race => race.winner)
-            .sort((a, b) => a.raceNo - b.raceNo)
-            .map(race => (
-              <RaceGuarded
-                key={race.raceNo}
-                race={race}
-                onSetWinner={this.handleWinner}
-                onDsqTeam={this.handleDsqTeam}
-              />
-            ))
-          }
-          <Text style={styles.section}>
-            Pending Races
-          </Text>
-          {races.filter(race => !race.winner)
-            .sort((a, b) => a.raceNo - b.raceNo)
-            .map(race => (
-              <Race
-                key={race.raceNo}
-                race={race}
-                onSetWinner={this.handleWinner}
-                onDsqTeam={this.handleDsqTeam}
-              />
-            ))
-          }
-          <Text>{this.state.message}</Text>
-        </ScrollView>
-      </View>
+      <ScrollView>
+        <Card>
+          <Card.Content>
+            <Text style={styles.section}>
+              Finished Races
+            </Text>
+            {races.filter(race => race.winner)
+              .sort((a, b) => a.raceNo - b.raceNo)
+              .map(race => (
+                <RaceGuarded
+                  key={race.raceNo}
+                  race={race}
+                  onSetWinner={this.handleWinner}
+                  onDsqTeam={this.handleDsqTeam}
+                />
+              ))
+            }
+            <Text style={styles.section}>
+              Pending Races
+            </Text>
+            {races.filter(race => !race.winner)
+              .sort((a, b) => a.raceNo - b.raceNo)
+              .map(race => (
+                <Race
+                  key={race.raceNo}
+                  race={race}
+                  onSetWinner={this.handleWinner}
+                  onDsqTeam={this.handleDsqTeam}
+                />
+              ))
+            }
+            <Text>{this.state.message}</Text>
+          </Card.Content>
+        </Card>
+      </ScrollView>
     );
   }
 }
 
-Races.navigationOptions = {
-  title: 'Races',
-};
-
-const { StatusBarManager } = NativeModules;
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBarManager.HEIGHT;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    textAlign: 'center',
-    paddingTop: STATUSBAR_HEIGHT,
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-  },
-  section: {
-    flex: 1,
-    justifyContent: 'center',
-    textAlign: 'center',
-  }
+Races.navigationOptions = ({ navigation }) => ({
+  title: navigation.getParam('title'),
 });
-
-
-          // <Text>
-          //   Finished Races (Display)
-          // </Text>
-          // {races
-          //   .filter(race => race.winner)
-          //   .sort((a, b) => a.raceNo - b.raceNo)
-          //   .map(race => <RaceDisplay race={race} />)
-          // }
