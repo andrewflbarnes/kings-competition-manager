@@ -43,4 +43,8 @@ const styles = StyleSheet.create({
   }
 });
 
+styles.winColor = '#11bb11';
+styles.dsqColor = 'red';
+styles.primaryColor = '#2288ee';
+
 export default styles;

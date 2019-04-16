@@ -20,17 +20,17 @@ export default function HomeScreen({ navigation }) {
           Management
         </Button>
         <Button
-          onPress={() => {navigation.navigate('Round1')}}
+          onPress={() => {navigation.navigate('Round1', { title: 'Round 1' })}}
           mode={mode} >
           Round 1
         </Button>
         <Button
-          onPress={() => {navigation.navigate('Round2')}}
+          onPress={() => {navigation.navigate('Round2', { title: 'Round 2' })}}
           mode={mode} >
           Round 2
         </Button>
         <Button
-          onPress={() => {navigation.navigate('Knockouts')}}
+          onPress={() => {navigation.navigate('Knockouts', { title: 'Knockouts' })}}
           mode={mode} >
           Knockouts
         </Button>

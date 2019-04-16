@@ -11,13 +11,14 @@ const defaultProps = {
 
 export default function Race({ race, onSetWinner, onDsqTeam, readonly }) {
   const { raceNo, division, team1, team2, winner, team1Dsq, team2Dsq } = race;
+  const { winColor, dsqColor } = styles;
 
   const team1Color = winner === 1
-    ? '#11ee11'
-    : team1Dsq ? 'red' : '';
+    ? winColor
+    : team1Dsq ? dsqColor : '';
   const team2Color = winner === 2
-    ? '#11ee11'
-    : team2Dsq ? 'red' : '';
+    ? winColor
+    : team2Dsq ? dsqColor : '';
 
   const handleTeam1Dsq = () => onDsqTeam(raceNo, 1);
   const handleTeam2Dsq = () => onDsqTeam(raceNo, 2);
@@ -28,6 +29,7 @@ export default function Race({ race, onSetWinner, onDsqTeam, readonly }) {
   return (
     <Card>
       <View style={styles.cardFlexRow}>
+      {/* <Card.Content style={styles.cardFlexRow}> */}
         <Text style={styles.small}>{raceNo}</Text>
         <Text style={styles.small}>{division}</Text>
         {!readonly && (
@@ -65,6 +67,7 @@ export default function Race({ race, onSetWinner, onDsqTeam, readonly }) {
         )}
         <Text style={styles.small}>{division}</Text>
         <Text style={styles.small}>{raceNo}</Text>
+      {/* </Card.Content> */}
       </View>
     </Card>
   )
