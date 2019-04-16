@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
-import { Card } from 'react-native-paper';
+import { View } from 'react-native';
+import { Card, Button, Text } from 'react-native-paper';
+import styles from '../styles';
 
 const defaultProps = {
   onSetWinner: () => {},
@@ -12,10 +13,10 @@ export default function Race({ race, onSetWinner, onDsqTeam, readonly }) {
   const { raceNo, division, team1, team2, winner, team1Dsq, team2Dsq } = race;
 
   const team1Color = winner === 1
-    ? 'green'
+    ? '#11ee11'
     : team1Dsq ? 'red' : '';
   const team2Color = winner === 2
-    ? 'green'
+    ? '#11ee11'
     : team2Dsq ? 'red' : '';
 
   const handleTeam1Dsq = () => onDsqTeam(raceNo, 1);
@@ -26,37 +27,41 @@ export default function Race({ race, onSetWinner, onDsqTeam, readonly }) {
 
   return (
     <Card>
-      <View style={styles.container}>
+      <View style={styles.cardFlexRow}>
         <Text style={styles.small}>{raceNo}</Text>
         <Text style={styles.small}>{division}</Text>
         {!readonly && (
-          <View style={styles.dsq} >
-            <Button
-              title='D'
-              onPress={handleTeam1Dsq}
-              color='red' />
-          </View>
+          <Button
+            compact
+            style={styles.dsq}
+            onPress={handleTeam1Dsq}
+            color='red'>
+            D
+          </Button>
         )}
-        <View style={styles.normal} >
-          <Button
-            title={team1}
-            onPress={handleTeam1Win}
-            color={team1Color} />
-        </View>
+        <Button
+          compact
+          style={styles.normal}
+          onPress={handleTeam1Win}
+          color={team1Color}>
+          {team1}
+        </Button>
         <Text style={styles.small}>vs</Text>
-        <View style={styles.normal} >
-          <Button
-            title={team2}
-            onPress={handleTeam2Win}
-            color={team2Color} />
-        </View>
+        <Button
+          compact
+          style={styles.normal}
+          onPress={handleTeam2Win}
+          color={team2Color}>
+          {team2}
+        </Button>
         {!readonly && (
-          <View style={styles.dsq} >
-            <Button
-              title='D'
-              onPress={handleTeam2Dsq}
-              color='red' />
-          </View>
+          <Button
+            compact
+            style={styles.dsq}
+            onPress={handleTeam2Dsq}
+            color='red'>
+            D
+          </Button>
         )}
         <Text style={styles.small}>{division}</Text>
         <Text style={styles.small}>{raceNo}</Text>
@@ -66,30 +71,3 @@ export default function Race({ race, onSetWinner, onDsqTeam, readonly }) {
 }
 
 Race.defaultProps = defaultProps
-
-const styleDefault = {
-  flexShrink: 0,
-  flexBasis: 0,
-  textAlign: 'center',
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-  },
-  normal: {
-    flexGrow: 5,
-    ...styleDefault,
-  },
-  small: {
-    flexGrow: 1,
-    ...styleDefault,
-  },
-  dsq: {
-    flexGrow: 2,
-    ...styleDefault,
-  },
-});

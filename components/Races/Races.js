@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Text, View, ScrollView, StyleSheet, Platform, NativeModules, Button } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Button } from 'react-native';
 import { Card } from 'react-native-paper';
 import RaceGuarded from './RaceGuarded';
 import Race from './Race';
+import styles from '../styles';
 
 export default class Races extends React.Component {
   constructor() {
@@ -91,7 +92,7 @@ export default class Races extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <Text style={styles.section}>
+          {/* <Text style={styles.section}>
             Finished Races (readonly)
           </Text>
           {races.filter(race => race.winner)
@@ -103,10 +104,10 @@ export default class Races extends React.Component {
                 readonly
               />
             ))
-          }
-          <Text style={styles.section}>
+          } */}
+          {/* <Text style={styles.section}>
             Finished Races (guarded)
-          </Text>
+          </Text> */}
           {races.filter(race => race.winner)
             .sort((a, b) => a.raceNo - b.raceNo)
             .map(race => (
@@ -142,26 +143,6 @@ export default class Races extends React.Component {
 Races.navigationOptions = {
   title: 'Races',
 };
-
-const { StatusBarManager } = NativeModules;
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBarManager.HEIGHT;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    textAlign: 'center',
-    paddingTop: STATUSBAR_HEIGHT,
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-  },
-  section: {
-    flex: 1,
-    justifyContent: 'center',
-    textAlign: 'center',
-  }
-});
-
 
           // <Text>
           //   Finished Races (Display)
