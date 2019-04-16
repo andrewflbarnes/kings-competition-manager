@@ -43,7 +43,7 @@ const theme = {
   //   surface: '#333333',
   //   accent: '#f1c40f',
   //   text: '#cccccc'
-  }
+  // }
 };
 
 export default function App() {
