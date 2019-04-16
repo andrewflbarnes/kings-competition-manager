@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Card, Text, List } from 'react-native-paper';
-import styles from '../styles';
 
 export default class ManagementTeam extends React.Component {
   constructor(props) {

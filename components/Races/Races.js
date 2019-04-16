@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import RaceGuarded from './RaceGuarded';
 import Race from './Race';
+import styles from '../styles';
 
 export default class Races extends React.Component {
   constructor(props) {
@@ -88,23 +89,10 @@ export default class Races extends React.Component {
     return (
       <View>
         <ScrollView>
-          {/* <Text style={styles.section}>
-            Finished Races (readonly)
+          <Text style={styles.section}>
+            Finished Races
           </Text>
           {races.filter(race => race.winner)
-            .sort((a, b) => a.raceNo - b.raceNo)
-            .map(race => (
-              <Race
-                key={race.raceNo}
-                race={race}
-                readonly
-              />
-            ))
-          } */}
-          {/* <Text style={styles.section}>
-            Finished Races (guarded)
-          </Text> */}
-          {/* {races.filter(race => race.winner)
             .sort((a, b) => a.raceNo - b.raceNo)
             .map(race => (
               <RaceGuarded
@@ -114,27 +102,20 @@ export default class Races extends React.Component {
                 onDsqTeam={this.handleDsqTeam}
               />
             ))
-          } */}
-          {/* <Text style={styles.section}>
+          }
+          <Text style={styles.section}>
             Pending Races
-          </Text> */}
-          {races.sort((a, b) => a.raceNo - b.raceNo)
-            .map(race => race.winner
-              ? (
-                <RaceGuarded
-                  key={race.raceNo}
-                  race={race}
-                  onSetWinner={this.handleWinner}
-                  onDsqTeam={this.handleDsqTeam}
-                />)
-              : (
-                <Race
-                  key={race.raceNo}
-                  race={race}
-                  onSetWinner={this.handleWinner}
-                  onDsqTeam={this.handleDsqTeam}
-                />)
-              )
+          </Text>
+          {races.filter(race => !race.winner)
+            .sort((a, b) => a.raceNo - b.raceNo)
+            .map(race => (
+              <Race
+                key={race.raceNo}
+                race={race}
+                onSetWinner={this.handleWinner}
+                onDsqTeam={this.handleDsqTeam}
+              />
+            ))
           }
           <Text>{this.state.message}</Text>
         </ScrollView>
@@ -144,14 +125,5 @@ export default class Races extends React.Component {
 }
 
 Races.navigationOptions = ({ navigation }) => ({
-  title: navigation.getParam('title', 'BOOM'),
+  title: navigation.getParam('title'),
 });
-
-          // <Text>
-          //   Finished Races (Display)
-          // </Text>
-          // {races
-          //   .filter(race => race.winner)
-          //   .sort((a, b) => a.raceNo - b.raceNo)
-          //   .map(race => <RaceDisplay race={race} />)
-          // }
