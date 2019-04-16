@@ -34,15 +34,15 @@ const UnthemedApp = createAppContainer(MainNavigator);
 
 const theme = {
   ...DefaultTheme,
-  roundness: 2,
-  dark: true,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: 'cyan',
-    background: '#222222',
-    surface: '#333333',
-    accent: '#f1c40f',
-    text: '#cccccc'
+  // roundness: 2,
+  // dark: true,
+  // colors: {
+  //   ...DefaultTheme.colors,
+  //   primary: 'cyan',
+  //   background: '#222222',
+  //   surface: '#333333',
+  //   accent: '#f1c40f',
+  //   text: '#cccccc'
   }
 };
 

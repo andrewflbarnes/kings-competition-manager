@@ -108,7 +108,7 @@ export default class Races extends React.Component {
           {/* <Text style={styles.section}>
             Finished Races (guarded)
           </Text> */}
-          {races.filter(race => race.winner)
+          {/* {races.filter(race => race.winner)
             .sort((a, b) => a.raceNo - b.raceNo)
             .map(race => (
               <RaceGuarded
@@ -118,20 +118,27 @@ export default class Races extends React.Component {
                 onDsqTeam={this.handleDsqTeam}
               />
             ))
-          }
-          <Text style={styles.section}>
+          } */}
+          {/* <Text style={styles.section}>
             Pending Races
-          </Text>
-          {races.filter(race => !race.winner)
-            .sort((a, b) => a.raceNo - b.raceNo)
-            .map(race => (
-              <Race
-                key={race.raceNo}
-                race={race}
-                onSetWinner={this.handleWinner}
-                onDsqTeam={this.handleDsqTeam}
-              />
-            ))
+          </Text> */}
+          {races.sort((a, b) => a.raceNo - b.raceNo)
+            .map(race => race.winner
+              ? (
+                <RaceGuarded
+                  key={race.raceNo}
+                  race={race}
+                  onSetWinner={this.handleWinner}
+                  onDsqTeam={this.handleDsqTeam}
+                />)
+              : (
+                <Race
+                  key={race.raceNo}
+                  race={race}
+                  onSetWinner={this.handleWinner}
+                  onDsqTeam={this.handleDsqTeam}
+                />)
+              )
           }
           <Text>{this.state.message}</Text>
         </ScrollView>
